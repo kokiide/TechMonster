@@ -20,8 +20,29 @@ class LobbyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //スタミナバーの拡大
+        staminaBar.transform = CGAffineTransform(scaleX: 1.0, y:4.0)
+        
+        //プレセット
+        nameLabel.text = player.name
+        levelLabel.text = String(format: "Lv. %d" , player.level)
+        
+        //起動時スタミナ最大
+        stamina = maxStamina
+        staminaBar.progress = stamina / maxStamina
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TechDraUtil.playBGM(fileName: "lobby")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        TechDraUtil.stopBGM()
     }
 
     override func didReceiveMemoryWarning() {
